@@ -1,4 +1,14 @@
-export default function FoodCard() {
+import Link from "next/link";
+import { FoodPlaceAllInfo } from "../services/food_places_service";
+
+type Props = {
+  data: FoodPlaceAllInfo;
+};
+
+export default function FoodCard(props: Props) {
+  function handleDirection(): void {
+    location.href = "http://www.example.com";
+  }
   return (
     <div className="max-w-sm bg-white border border-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       {/* <img
@@ -9,26 +19,25 @@ export default function FoodCard() {
       <div>
         <iframe
           className="h-[30vh] w-full border-0 rounded-t-lg"
-          src="https://www.youtube.com/embed/H2fDibROvho?rel=0"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-                gyroscope; picture-in-picture; full-screen;
-                web-share"
+          src={props?.data?.video_link}
           allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
         ></iframe>
       </div>
 
       <div className="p-5">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Noteworthy technology acquisitions 2021
+          {props?.data?.food_place_name}
         </h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
+          {props?.data?.food_place_description}
         </p>
         <div className="flex gap-2 justify-between">
           <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            All Info
+            <Link href={`/food-place/${props.data.food_place_id}`}>
+              All Info
+            </Link>
+
             <svg
               className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
               aria-hidden="true"
@@ -45,8 +54,16 @@ export default function FoodCard() {
               />
             </svg>
           </button>
-          <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Directions
+          <button
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button"
+          >
+            <Link
+              href={`http://maps.google.com/?q=${props?.data?.food_place_name}`}
+              target="blank"
+            >
+              Directions
+            </Link>
             <svg
               className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
               aria-hidden="true"
