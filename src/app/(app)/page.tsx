@@ -1,5 +1,5 @@
-import FoodCard from "./components/FoodCard";
-import { getFoodPlaceAllInfo } from "./services/food_places_service";
+import FoodCard from "../components/FoodCard";
+import { getFoodPlaceAllInfo } from "../services/food_places_service";
 
 export default async function Home() {
   const data = await getFoodPlaceAllInfo();
