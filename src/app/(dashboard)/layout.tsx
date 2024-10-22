@@ -14,9 +14,11 @@ export default function DashboardLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased flex`}>
+      <body className={`antialiased flex flex-col sm:flex-row w-full`}>
         <Sidebar />
-        <main>{children}</main>
+        <main className="w-full max-h-screen overflow-y-scroll">
+          {children}
+        </main>
       </body>
     </html>
   );
