@@ -1,3 +1,11 @@
+import { FormEvent } from "react";
+
+export type APIFoodPlaceState = {
+  result?: FoodPlace;
+  error?: Error;
+  loading: boolean;
+};
+
 export interface FoodPlaceAllInfo {
   food_place_id: string;
   food_place_name: string;
@@ -8,6 +16,12 @@ export interface FoodPlaceAllInfo {
   video_link: string;
   video_likes: number;
   user_likes: number;
+}
+
+export interface FoodPlace {
+  food_place_id?: string;
+  food_place_name: string;
+  food_place_description: string;
 }
 
 export async function getFoodPlaceAllInfo(): Promise<
@@ -33,7 +47,7 @@ export async function getFoodPlaceAllInfo(): Promise<
 
 export async function getFoodPlaceAllInfoById(
   id: string
-): Promise<FoodPlaceAllInfo | undefined | Error> {
+): Promise<FoodPlace | undefined | Error> {
   const baseUrl = process.env.BASE_API_URL;
 
   if (baseUrl) {
@@ -50,4 +64,42 @@ export async function getFoodPlaceAllInfoById(
 
     return res.json();
   }
+}
+
+export async function createFoodPlaceAction(
+  event: FormEvent<HTMLFormElement>
+): Promise<APIFoodPlaceState> {
+  event.preventDefault();
+
+  const baseUrl = "http://localhost:7070/api/v1";
+  const formData = new FormData(event.currentTarget);
+  const payload = <FoodPlace>{
+    food_place_name: formData.get("food_place_name"),
+    food_place_description: formData.get("food_place_description"),
+  };
+  const res = await fetch(`${baseUrl}/create-food-place`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    return <APIFoodPlaceState>{
+      result: undefined,
+      error: new Error("Could not create food place."),
+      loading: false,
+    };
+  }
+
+  const data = await res.json();
+
+  return {
+    result: data,
+    error: undefined,
+    loading: false,
+  };
 }
