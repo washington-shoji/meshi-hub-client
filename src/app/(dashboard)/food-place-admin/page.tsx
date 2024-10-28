@@ -2,6 +2,7 @@
 
 import CreateFoodPlaceForm from "@/app/components/CreateFoodPlaceForm";
 import FoodPlaceAdminTable from "@/app/components/FoodPlaceAdminTable";
+import { getFoodPlaceAllInfo } from "@/app/services/food_places_service";
 import { useState } from "react";
 
 export default function CreateFoodPlace() {
