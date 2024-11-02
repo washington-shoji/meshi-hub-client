@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FoodPlaceAllInfo } from "../services/food_places_service";
+import { FoodPlaceAllInfo } from "../app/services/food_places_service";
 
 type Props = {
   data: FoodPlaceAllInfo;
@@ -19,7 +19,7 @@ export default function FoodCard(props: Props) {
       <div>
         <iframe
           className="h-[30vh] w-full border-0 rounded-t-lg"
-          src={props?.data?.video_link}
+          src={props?.data?.video_link?.replace("shorts", "embed")}
           allowFullScreen
           referrerPolicy="strict-origin-when-cross-origin"
         ></iframe>
@@ -55,7 +55,7 @@ export default function FoodCard(props: Props) {
           </Link>
 
           <Link
-            href={`http://maps.google.com/?q=${props?.data?.food_place_name}`}
+            href={`${props?.data?.food_place_address_map_direction}`}
             target="blank"
           >
             <button
