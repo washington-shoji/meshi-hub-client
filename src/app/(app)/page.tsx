@@ -1,4 +1,4 @@
-import FoodCard from "../components/FoodCard";
+import FoodCard from "../../components/FoodCard";
 import { getFoodPlaceAllInfo } from "../services/food_places_service";
 
 export default async function Home() {
