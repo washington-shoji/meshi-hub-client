@@ -10,7 +10,7 @@ export default function FoodCard(props: Props) {
     location.href = "http://www.example.com";
   }
   return (
-    <div className="max-w-sm bg-white border border-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="sm:max-w-sm bg-white border border-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       {/* <img
         className="rounded-t-lg h-[30vh] w-full"
         src="/food/img-1.webp"
@@ -25,13 +25,16 @@ export default function FoodCard(props: Props) {
         ></iframe>
       </div>
 
-      <div className="p-5">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {props?.data?.food_place_name}
-        </h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {props?.data?.food_place_description}
-        </p>
+      <div className="flex flex-col justify-between p-5">
+        <div className=" min-h-[150px]">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {props?.data?.food_place_name}
+          </h5>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            {props?.data?.food_place_description}
+          </p>
+        </div>
+
         <div className="flex gap-2 justify-between">
           <Link href={`/food-place/${props.data.food_place_id}`}>
             <button className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
