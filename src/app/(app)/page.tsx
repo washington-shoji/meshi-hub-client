@@ -31,7 +31,7 @@ export default async function Home() {
   } else if (data) {
     return (
       <main className="flex flex-col gap-4">
-        <div className="grid grid-cols-[repeat(auto-fit,_minmax(450px,_1fr))] justify-center gap-16 p-16">
+        <div className="grid sm:grid-cols-[repeat(auto-fit,_minmax(450px,_1fr))] justify-center gap-4 sm:gap-16 p-1 sm:p-16">
           {data?.map((d, i) => {
             return <FoodCard key={i} data={d} />;
           })}
